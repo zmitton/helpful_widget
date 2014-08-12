@@ -1,4 +1,4 @@
-# Kohana PHP Framework
+# Helpful-not-Helpful widget example for demand media
 
 AMMPS install for my mac running Mavericks. This is ment to be pretty simple. If you have any questions raise an issue. 
 On the ampps install I actually downloaded Kohana from the "frameworks" link. It uses code developed originally by github user: shadowhand [this empty kohana framework](https://github.com/kohana/kohana to build a simple crud app on top of an [AMPPS install](http://ampps.com/download).
@@ -14,7 +14,7 @@ unfortunately Heroku doesn't support Kohana frameworks, so instead of scratching
 making it pretty:
 I quickly realized I needed to make a page that looked professional to stick in the background of this "widget". the actual eHow.com page looks snazzy as hell, so I though, I have basically two choices here: download a simple responsive css template, or try to make my own from scratch and risk having my site look like it was built in 2002. Now I just need to find something that isn't designed specifically for wordpress, something kindof difficult these days.
 
-once I have my article, and my helpful-not-helpful widget sitting in it, I need to determine how to connect this thing to data.The obvious structure would be a Post model, that has many Votes attached to it. The Votes will have a boolean 'helpful' field indicating yes or no, and will be tied to many 'Vote_Reasons'. The Vote_Reasons are join tables, and the last table, 'Reasons', contains only 5 single field text entries: Too general, Out of date, Inaccurate, Needs more photos, and Other.
+once I have my article, and my helpful-not-helpful widget sitting in it, I need to determine how to connect this thing to data.The obvious structure would be a Article model, that has many Votes attached to it. The Votes will have a boolean 'helpful' field indicating yes or no, and will be tied to many 'Vote_Reasons'. The Vote_Reasons are join tables, and the last table, 'Reasons', contains only 5 single field text entries: Too general, Out of date, Inaccurate, Needs more photos, and Other.
 
 The only thing left out of the picture here is the User. I'd like to tie all of this back to a user, but then by convention I would have to require a person to create an account and login. The current eHow site isn't requiring login in order to vote. This is actually a bit perplexing to me because any decent hacker should be able to corrupt these votes with thousands upon thousands of vote requests. Generally there is at least a captcha required. I believe these votes are not considered a "big deal" within the company and 99% of the time they are overlooked by malicious hackers.
 
