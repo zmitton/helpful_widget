@@ -1,0 +1,60 @@
+<div id="content_wrapper">
+	<h1>Article: <%=@article.title%></h1><h2>by <%=@article.author%></h2>
+	</br>
+	<h1>Was This Article Helpful?</h1>
+	<h2>After <%= @votes.length %> votes, here are the results</h2>
+  <div id="piechart" style="width: 900px; height: 500px;"></div>
+  <div id="barchart" style="width: 900px; height: 500px;"></div>
+  <script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Response', 'Number of People'],
+        ['Yes',     <%=@votes.inject(0){|sum, vote| sum = vote.helpful ? sum + 1 : sum  }%>],
+        ['No',      <%=@votes.inject(0){|sum, vote| sum = vote.helpful == false ? sum + 1 : sum  }%>]
+      ]);
+      var options = {
+        title: "Was this article on '<%=@article.title%>' helpful?"
+      };
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+      chart.draw(data, options);
+    }
+    google.setOnLoadCallback(drawBarChart);
+    <%
+      histogram = Hash.new(1)
+      @article.reasons.each do |reason|
+          histogram[reason.description] += 1
+      end
+    %>
+    function drawBarChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Response', 'Number of People'],
+        <% histogram.each do |key, value| %>
+          ['<%=key%>',   <%=value%> ],
+        <% end %>
+        ['', 0]
+      ]);
+      var options = {
+        title: 'Was this article on <%=@article.title%> helpful?'
+      };
+      var chart = new google.visualization.BarChart(document.getElementById('barchart'));
+      chart.draw(data, options);
+    }
+
+
+  </script>
+
+
+  <h2>Written Responses</h2>
+  <ul>
+    <% @votes.each do |vote| 
+      if vote.reason_text && vote.reason_text != ""
+      %>
+        <li><%=vote.reason_text%></li>
+      <% end %>
+    <% end %>
+  </ul>
+
+
+</div>

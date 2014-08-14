@@ -1,0 +1,26 @@
+	
+<div id ="widget_container" class="fixedElement">
+	<div id="vote_container">
+		<div class="rotate">
+			Helpful?
+		</div>
+	</div>
+	<button id="yes_button" type="button">Yes</button></br>
+	<button id="no_button" type="button">No</button>
+
+	<div id="reasons_container">
+		<div id="reasons_head">Why not?</div>
+			<form id="reasons_form">
+				<% Reason.all.each do |reason| %>
+					<li><input type="checkbox" name="reasons_arr[]" value="<%=reason.id%>"> <%= reason.description %></li>
+				<% end %>
+
+				<div id="reason_text_and_submit">
+					<textarea id="reason_text" rows="1" cols="34"></textarea></br>
+					<button id="submit_reasons_button" type="button">Submit</button>
+				</div>
+			</form>
+	</div>
+
+
+</div>

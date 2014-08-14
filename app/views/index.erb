@@ -1,4 +1,15 @@
-<div class="container">
-  <h1>index</h1>
-  <h2>hello thin world</h2>
+<div id="content_wrapper">
+	<h1>This is the home page click on an article. any article</h1>
+	<% @articles.each do |article| %>
+		<a href="/articles/<%=article.id%>"><%=article.title%></a>
+		<p> a <%=article.subject%> article by <%=article.author%></p>
+	<% end %>
+
 </div>
+
+
+
+
+
+
+

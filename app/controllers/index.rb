@@ -1,8 +1,5 @@
 get '/' do
-  erb :index
-end
-
-get '/article/:article_id' do
+	@articles = Article.all
   erb :index
 end
 
