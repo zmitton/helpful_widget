@@ -13,6 +13,11 @@ body{
 	margin-right: auto;
 }
 
+    #barchart, #piechart{
+        width: 900px; 
+        height: 500px;        
+    }
+
 #content_wrapper{
     font-family: "Museo300-Regular";
     font-size: 25px;
@@ -22,6 +27,14 @@ body{
     #content_wrapper{
         font-size: 18px;
     }
+
+    #barchart, #piechart{
+        width: 450px; 
+        height: 250px;        
+    }
+
+id="barchart" style="width: 900px; height: 500px;"
+
 }
 
 #widget_container{

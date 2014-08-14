@@ -6,7 +6,7 @@ Unfortunately Heroku doesn't support Kohana frameworks, so instead of scratching
 
 <h2>making it pretty:</h2>
 
-</p>I quickly realized I needed to make a page that looked professional to stick in the background of this "widget". the actual eHow.com page looks snazzy as hell, so I though, I have basically two choices here: download a simple responsive css template, or try to make my own from scratch and risk having my site look like it was built in 2002. Now I just need to find something that isn't designed specifically for wordpress, something kindof difficult these days.
+</p>I quickly realized I needed to make a page that looked decent to stick in the background of this "widget". the actual eHow.com page looks snazzy as hell, so I though, I have basically two choices here: download a simple responsive css template, or try to make my own from scratch and risk having my site look like it was built in 2002. Now I just need to find something that isn't designed specifically for wordpress, something kindof difficult these days.
 
 once I have my article, and my helpful-not-helpful widget sitting in it, I need to determine how to connect this thing to data.The obvious structure would be a Article model, that has many Votes attached to it. The Votes will have a boolean 'helpful' field indicating yes or no, and will be tied to many 'Vote_Reasons'. The Vote_Reasons are join tables, and the last table, 'Reasons', contains only 5 single field text entries: Too general, Out of date, Inaccurate, Needs more photos, and Other.
 
@@ -16,11 +16,9 @@ I do however appreciate the fact that my vote is counted even though I haven't l
 
 <p>Next I have to stick some css and ajax onto the widget to get it flowing up and down the page properly. Lets test this functionality in a few browsers and devices. The only way to get it on my phone is to post to a live server so this marks my first heroku push.
 
-making an app in heroku is rather easy, just add a few configuration files to the project to tell it how too serve and adding a subdomain and a cName to my godaddy zone file, and it was up and running at "HelpfulWidget.ZacMitton.com".
+making an app in heroku is rather easy, just add a few configuration files to the project to tell it how too serve and adding a subdomain and a cName to my godaddy zone file, and it was up and running at "helpful-not-helpful.ZacMitton.com".
 
 So now I have the data, and I need to display the rest of the page to display said data using RESTful routes. Here are those routes, in link form for easy access:</p>
-
-<p>Now I have more pages though, and I dont want them to look all crappy either. more css beautification, but the problem really is a matter of lacking content. When you dont have much content, you can't make a page look very good. </p>
 
 <p>As far as RESTful routing I have routes for 'articles' even though I'm only going to write this one article. I will design the routes assuming many articles could exist. Each of which could have many 'votes' and 'reasons' for those votes. Because the POST requests are ajax, I don't need many of the routes for displaying fors, editing and so-on. The only ones I really need are the following</p>
 <ul>
@@ -29,6 +27,10 @@ So now I have the data, and I need to display the rest of the page to display sa
 <li>post '/articles/:article_id/votes' ---for creating new vote records AND cerating the vote reasons to go along with them. It made sense to break strict convention here because inputing reasons with a separate route would have added an uneeded extra ajax call </li>
 <li><a href="/articles/1/votes"> get '/articles/:article_id/votes' </a> ---for lastly I decided to make the route to show all votes (and their reasons) coresponding to a particular article</li>
 </ul>
+
+<p>Now I have more pages though, and I dont want them to look all crappy either. more css beautification, but the problem really is a matter of lacking content. When you dont have much content, you can't make a page look very good. </p>
+
+
 
 
 STRING
