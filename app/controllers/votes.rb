@@ -1,3 +1,9 @@
+get '/articles/:article_id/votes/new' do
+  erb :_vote2, :layout => false 
+end
+
+
+
 get '/articles/:article_id/votes' do
 	@article = Article.find(params[:article_id])
 	@votes = @article.votes
@@ -16,3 +22,28 @@ post '/articles/:article_id/votes' do
 	end
 	vote.to_s
 end
+
+
+#tempetmeptmeptmeptmep
+get '/articles/:article_id/votes/temp' do
+	@reasons = Reason.all
+  erb :_vote3, :layout => false 
+end
+
+
+
+
+# <html> 
+#   <head> 
+#     <script src="jquery.js"></script> 
+#     <script> 
+#     $(function(){
+#       $("#includedContent").load("b.html"); 
+#     });
+#     </script> 
+#   </head> 
+
+#   <body> 
+#      <div id="includedContent"></div>
+#   </body> 
+# </html>

@@ -1,0 +1,289 @@
+<script>
+// var frame = document.createElement('div');
+// frame.innerHTML = '<iframe id="frame_proxy" name="frame_proxy" src="http://localhost:9393/articles/:article_id/votes/temp"></iframe>';
+// frame = frame.getElementsByTagName('iframe')[0];
+// frame.style.display = 'none';
+
+</script>
+
+
+
+
+<style>
+
+/*@font-face{
+    font-family: "Museo300-Regular";
+    src: url('Museo300-Regular.ttf'),
+    url('Thonburi-Bold.eot'); /* IE */
+}*/
+
+
+body{
+	/*width: 100%;*/
+	padding: 60px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+nav a{
+    padding: 20px;
+}
+
+    #barchart, #piechart{
+        width: 900px; 
+        height: 500px;        
+    }
+
+#content_wrapper{
+/*    font-family: "Museo300-Regular";
+*/    font-size: 25px;
+}
+
+@media only screen and (max-width: 40em) {
+    #content_wrapper{
+        font-size: 18px;
+    }
+
+    #barchart, #piechart{
+        width: 450px; 
+        height: 250px;        
+    }
+
+id="barchart" style="width: 900px; height: 500px;"
+
+}
+
+#widget_container{
+	border-radius: 5px;
+  
+    width: 40px;
+    height: 200px;
+
+    top:800px;
+    left: 20px;
+    position: absolute;
+
+/*    font-family: "Museo300-Regular";
+*/    background-color: gray;
+}
+
+#vote_container{
+    width: 40px;
+    padding-top: 70px;
+    font-size: 1.5em;
+    letter-spacing: 1px;
+}
+
+#yes_button{
+	background:none!important;
+    border:none; 
+    padding:0!important;
+    border-bottom:1px solid #444; 
+    border-top:1px solid #444; 
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+	margin-top: 20px;
+	background-color: gray;
+}
+
+#no_button{
+	background:none!important;
+    border:none; 
+    padding:0!important;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+	background-color: gray;
+}
+
+#reasons_container{
+	display:none;
+	
+	/*display: block;*/
+	position: relative;
+	top: -199px;
+	left: 40px;	
+    font-size: 20px;
+    letter-spacing: 1px;
+    background-color: #CCC;
+    width: 260px;
+    height: 200px;	
+
+}
+
+#reasons_container li{
+	list-style-type: none;
+	padding-left: 26px;
+    font-size: 16px;
+}
+
+#reason_text_and_submit {
+	padding: 5px 10px 0px 0px;
+    font-size: 14px;
+    text-align: right;
+
+}
+
+#reasons_head{padding: 10px;}
+#reason_text_and_submit button {margin-top: 2px;}
+textarea {resize:none}
+
+.rotate{
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+</style>	
+
+
+
+
+
+<div id ="widget_container" class="fixedElement">
+	<div id="vote_container">
+		<div class="rotate">
+			Helpful?
+		</div>
+	</div>
+	<button id="yes_button" type="button">Yes</button></br>
+	<button id="no_button" type="button">No</button>
+
+	<div id="reasons_container">
+		<div id="reasons_head">Why not?</div>
+			<form id="reasons_form">
+				<% Reason.all.each do |reason| %>
+					<li><input type="checkbox" name="reasons_arr[]" value="<%=reason.id%>"> <%= reason.description %></li>
+				<% end %>
+
+				<div id="reason_text_and_submit">
+					<textarea id="reason_text" rows="1" cols="34"></textarea></br>
+					<button id="submit_reasons_button" type="button">Submit</button>
+				</div>
+			</form>
+	</div>
+</div>
+
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+	function unserialize(serial) {
+	 var keyValue, unserial = {};
+	 serial = serial.split('&');
+	 for(var i = 0, length = serial.length; i < length; i++) 
+	 {
+	  keyValue = serial[i].split('=');
+	  if(keyValue.length == 2)
+	  {
+	   unserial[keyValue[0]] = keyValue[1];
+	  }
+	 }
+	 return unserial;
+	};
+
+
+
+
+
+	$("#submit_reasons_button").click(function() {
+
+		var post_data = $('#reasons_form').serializeArray();
+		post_data.push({name: 'helpful', value: false});
+		post_data.push({name: 'reason_text', value: $('#reason_text').val() });
+	    var url = "/votes";
+
+		$.ajax({
+			type: "POST",
+			url: "http://localhost:9393/articles/1" + "/votes",
+			data: post_data
+		})
+		.done(function( msg ) {
+			console.log( "Data Back: " + msg );
+			$('#reasons_container').html("</br></br>Thank you for helping us make eHow better for everyone");
+			$('#reasons_container').css({'text-align': 'center'}); 
+			setTimeout(function(){ $('#widget_container').fadeOut("slow"); }, 2000);
+		});
+	});
+
+
+
+	$("#yes_button").click(function() {
+
+		var post_data = $('#reasons_form').serializeArray();
+		post_data.push({name: 'helpful', value: true});
+		post_data.push({name: 'reason_text', value: $('#reason_text').val() });
+	    var url = "/votes";
+	    console.log(post_data);
+
+	$.ajax({
+		type: "POST",
+		url: "http://localhost:9393/articles/1" + "/votes",
+		data: post_data
+	})
+		.done(function( msg ) {
+			$('#reasons_container').css({'display': 'block'}); 
+			$('#widget_container').css({'width': '300'}); 
+			$('#reasons_container').html("</br></br>Thank you for helping us make eHow better for everyone");
+			$('#reasons_container').css({'text-align': 'center'}); 
+			setTimeout(function(){ $('#widget_container').fadeOut("slow"); }, 2000);
+		});
+	});
+
+
+
+
+
+
+
+
+	$( "#no_button" ).click(function() {
+		$('#reasons_container').css({'display': 'block'}); 
+		$('#widget_container').css({'width': '300'}); 
+
+	});
+
+
+
+$(window).scroll(function(e){ 
+  $el = $('.fixedElement'); 
+  if ($(this).scrollTop() > 770 && $el.css('position') != 'fixed'){ 
+  	console.log("here");
+	$('.fixedElement').css({'position': 'fixed', 'top': '30px'}); 
+  }
+  if ($(this).scrollTop() < 770 && $el.css('position') == 'fixed')
+  {
+    $('.fixedElement').css({'position': 'absolute', 'top': '800px'}); 
+  	console.log("here2");
+  } 
+});
+
+
+var form = document.createElement('form');
+form.setAttribute('method', 'post');
+form.setAttribute('action', 'http://localhost:9393/articles/1/votes');
+form.setAttribute('target', 'frame_proxy');
+var params = unserialize('name=Joe&age=24');
+for(var key in params)
+{
+ input = document.createElement('input');
+ input.setAttribute('type', 'hidden');
+ input.setAttribute('name', key);
+ input.setAttribute('value', params[key]);
+ form.appendChild(input);
+}
+
+
+
+
+ </script>
+
+
+
+
