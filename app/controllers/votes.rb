@@ -20,6 +20,8 @@ post '/articles/:article_id/votes' do
 			VoterReason.create(vote_id: vote.id, reason_id: reason_id)
 		end
 	end
+	response['Access-Control-Allow-Origin'] = 'http://localhost:9393'
+	response['Access-Control-Allow-Origin'] = 'null'
 	vote.to_s
 end
 
@@ -30,6 +32,9 @@ get '/articles/:article_id/votes/temp' do
   erb :_vote3, :layout => false 
 end
 
+get '/test' do
+	erb :test
+end
 
 
 
