@@ -68,20 +68,6 @@ $(window).scroll(function(e){
   } 
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	$("#submit_reasons_button").click(function() {
 
 		var post_data = $('#reasons_form').serializeArray();
@@ -101,7 +87,6 @@ $(window).scroll(function(e){
 			setTimeout(function(){ $('#widget_container').fadeOut("slow"); }, 2000);
 		});
 	});
-
 
 
 	$("#yes_button").click(function() {
@@ -127,38 +112,11 @@ $(window).scroll(function(e){
 	});
 
 
-
-
-
-
-
-
 	$( "#no_button" ).click(function() {
 		$('#reasons_container').css({'display': 'block'}); 
 		$('#widget_container').css({'width': '300'}); 
 
 	});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
