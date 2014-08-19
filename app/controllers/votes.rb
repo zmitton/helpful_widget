@@ -21,34 +21,11 @@ post '/articles/:article_id/votes' do
 		end
 	end
 	# response['Access-Control-Allow-Origin'] = 'http://localhost:9393'
-	# headers( "Access-Control-Allow-Origin" => "*" )
+	headers( "Access-Control-Allow-Origin" => "*" )
 	vote.to_s
 end
 
 
-#tempetmeptmeptmeptmep
-get '/articles/:article_id/votes/temp' do
-	@reasons = Reason.all
-  erb :_vote3, :layout => false 
-end
-
 get '/test' do
 	erb :test, :layout => false 
 end
-
-
-
-# <html> 
-#   <head> 
-#     <script src="jquery.js"></script> 
-#     <script> 
-#     $(function(){
-#       $("#includedContent").load("b.html"); 
-#     });
-#     </script> 
-#   </head> 
-
-#   <body> 
-#      <div id="includedContent"></div>
-#   </body> 
-# </html>
