@@ -21,7 +21,7 @@ post '/articles/:article_id/votes' do
 		end
 	end
 	# response['Access-Control-Allow-Origin'] = 'http://localhost:9393'
-	headers( "Access-Control-Allow-Origin" => "http://localhost:9393" )
+	headers( "Access-Control-Allow-Origin" => "*" )
 	vote.to_s
 end
 
