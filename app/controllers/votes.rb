@@ -20,8 +20,7 @@ post '/articles/:article_id/votes' do
 			VoterReason.create(vote_id: vote.id, reason_id: reason_id)
 		end
 	end
-	response['Access-Control-Allow-Origin'] = 'http://localhost:9393'
-	response['Access-Control-Allow-Origin'] = 'null'
+	response['Access-Control-Allow-Origin'] = 'http://hnh-zacmitton.herokuapp.com'
 	vote.to_s
 end
 
