@@ -3,7 +3,6 @@ get '/articles/:article_id/votes/new' do
 end
 
 
-
 get '/articles/:article_id/votes' do
 	@article = Article.find(params[:article_id])
 	@votes = @article.votes

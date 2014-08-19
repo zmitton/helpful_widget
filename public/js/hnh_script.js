@@ -8,7 +8,7 @@ if (!document.getElementById(hnh_css))
     link.id   = hnh_css;
     link.rel  = 'stylesheet';
     link.type = 'text/css';
-    link.href = 'http://hnh-zacmitton.herokuapp.com/css/hnh_widget.css';
+    link.href = 'http://helpful-not-helpful.zacmitton.com/css/hnh_widget.css';
     link.media = 'all';
     head.appendChild(link);
 }
@@ -77,7 +77,7 @@ $(window).scroll(function(e){
 
 		$.ajax({
 			type: "POST",
-			url: "http://hnh-zacmitton.herokuapp.com/articles/1" + "/votes",
+			url: "http://helpful-not-helpful.zacmitton.com/articles/1" + "/votes",
 			data: post_data
 		})
 		.done(function( msg ) {
@@ -99,7 +99,7 @@ $(window).scroll(function(e){
 
 	$.ajax({
 		type: "POST",
-		url: "http://hnh-zacmitton.herokuapp.com/articles/1"  + "/votes",
+		url: "http://helpful-not-helpful.zacmitton.com/articles/1"  + "/votes",
 		data: post_data
 	})
 		.done(function( msg ) {
