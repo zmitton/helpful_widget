@@ -1,9 +1,4 @@
 
-@font-face{
-    font-family: "Museo300-Regular";
-    src: url('Museo300-Regular.ttf'),
-    url('Thonburi-Bold.eot'); /* IE */
-}
 
 
 body{
@@ -36,9 +31,9 @@ nav a{
         width: 450px; 
         height: 250px;        
     }
-
+/*
 id="barchart" style="width: 900px; height: 500px;"
-
+*/
 }
 
 #widget_container{
@@ -123,4 +118,14 @@ textarea {resize:none}
 	-ms-transform: rotate(-90deg);
 	-o-transform: rotate(-90deg);
 	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+@font-face{
+    font-family: "Museo300-Regular";
+    src: url('Museo300-Regular.ttf'),
+    url('Thonburi-Bold.eot'); /* IE */
+}
+
+#content_wrapper div div{
+    background-color: black;
 }
