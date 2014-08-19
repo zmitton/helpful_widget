@@ -1,7 +1,6 @@
-//hello world
 
-//css importer code
-var hnh_css = 'myCss';  // you could encode the css path itself to generate id..
+//widget css importer
+var hnh_css = 'myCss';  
 if (!document.getElementById(hnh_css))
 {
     var head  = document.getElementsByTagName('head')[0];
@@ -9,12 +8,12 @@ if (!document.getElementById(hnh_css))
     link.id   = hnh_css;
     link.rel  = 'stylesheet';
     link.type = 'text/css';
-    link.href = 'http://localhost:9393/css/hnh_widget.css';
+    link.href = 'http://hnh-zacmitton.herokuapp.com/css/hnh_widget.css';
     link.media = 'all';
     head.appendChild(link);
 }
 
-
+//hidget html importer
 var hnh_div = document.createElement("div");
 hnh_div.id = "widget_container";
 hnh_div.className = hnh_div.className + "fixedElement";
@@ -55,6 +54,19 @@ hnh_widget_string += "	<\/div>";
 hnh_div.innerHTML = hnh_widget_string;
 
 
+//imperatively js widget functionality
+$(window).scroll(function(e){ 
+  $el = $('.fixedElement'); 
+  if ($(this).scrollTop() > 770 && $el.css('position') != 'fixed'){ 
+  	console.log("here")
+	$('.fixedElement').css({'position': 'fixed', 'top': '30px'}); 
+  }
+  if ($(this).scrollTop() < 770 && $el.css('position') == 'fixed')
+  {
+    $('.fixedElement').css({'position': 'absolute', 'top': '800px'}); 
+  	console.log("here2")
+  } 
+});
 
 
 
@@ -79,7 +91,7 @@ hnh_div.innerHTML = hnh_widget_string;
 
 		$.ajax({
 			type: "POST",
-			url: "http://localhost:9393/articles/1" + "/votes",
+			url: "http://hnh-zacmitton.herokuapp.com/articles/1" + "/votes",
 			data: post_data
 		})
 		.done(function( msg ) {
@@ -102,7 +114,7 @@ hnh_div.innerHTML = hnh_widget_string;
 
 	$.ajax({
 		type: "POST",
-		url: "http://localhost:9393/articles/1"  + "/votes",
+		url: "http://hnh-zacmitton.herokuapp.com/articles/1"  + "/votes",
 		data: post_data
 	})
 		.done(function( msg ) {
@@ -129,18 +141,7 @@ hnh_div.innerHTML = hnh_widget_string;
 
 
 
-$(window).scroll(function(e){ 
-  $el = $('.fixedElement'); 
-  if ($(this).scrollTop() > 770 && $el.css('position') != 'fixed'){ 
-  	console.log("here")
-	$('.fixedElement').css({'position': 'fixed', 'top': '30px'}); 
-  }
-  if ($(this).scrollTop() < 770 && $el.css('position') == 'fixed')
-  {
-    $('.fixedElement').css({'position': 'absolute', 'top': '800px'}); 
-  	console.log("here2")
-  } 
-});
+
 
 
 
